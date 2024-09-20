@@ -1,0 +1,244 @@
+
+      <style type="text/css">
+        .decision .options .option.agree {
+            border: 4px solid #4C9070 !important;
+        }
+        .decision .options .option.disagree {
+            border: 4px solid #F44336 !important;;
+        }
+        .evaluate_remarks_text{
+            border: 1px solid #d4d4d4 !important;
+        }
+        .factors-table th{
+            text-align:center;
+        }
+        th, td {
+      border: 1px solid #ccc !important;
+      border-collapse: collapse;
+      vertical-align: top;
+      font-size: 11px;
+      font-family:Arial, Helvetica, sans-serif;
+      padding:10px;
+      
+    }
+       table{
+        border-collapse: collapse;
+       }
+       table, tr, td { page-break-inside: avoid; }
+    </style>
+    <!-- <?php 
+    $logo = "";
+    $othrt_array = array(11);
+    $ohrm_array = array(4,7,10,40,5,23,33,34,35,43,44,46,50,51);
+    $mlink_array = array(27,52);
+    $staffing_bay_array = array(48,49);
+    $lead_array = array(25); 
+    if(in_array(department'],$othrt_array)){
+        $logo = $_SERVER['DOCUMENT_ROOT']."/eval_can/assets/agency_logo/ontimehr.jpg";
+    }
+    if(in_array(department'],$ohrm_array)){
+        $logo = $_SERVER['DOCUMENT_ROOT']."/eval_can/assets/agency_logo/ohr.png";
+    }
+    if(in_array(department'],$mlink_array)){
+        $logo = $_SERVER['DOCUMENT_ROOT']."/eval_can/assets/agency_logo/mlink.png";
+    }
+    if(in_array(department'],$staffing_bay_array)){
+        $logo = $_SERVER['DOCUMENT_ROOT']."/eval_can/assets/agency_logo/staffing_bay.png";
+    }
+    if(in_array(department'],$lead_array)){
+        $logo = $_SERVER['DOCUMENT_ROOT']."/eval_can/assets/agency_logo/leadon.png";
+    }
+    
+        
+    ?> -->
+    <div>
+    
+    <table class="table table-inverse factors-table" style="width:100%;border: none !important;">
+                <tr>
+                    <td style="text-align:left !important;border: none !important;width:35%"><img width="70" height="25" src="<%= logo; %>"></td>
+                    <td style="text-align:left !important;border: none !important;width:65%;padding-top:15px"><h2>Risk Assessment</h2></td>
+                </tr>
+    </table>
+            
+    <table class="" style="width:100%;padding-top:10px;border: none !important;">
+                <tr>
+                  <td style="text-align:left !important;width:25%"><h6>Title</h6></td>
+                  <td style="text-align:left !important;width:25%"><%= activity_name %></td>
+                  <td style="text-align:left !important;width:25%"><h6>Date of Assessment</h6></td>
+                  <% if(assigned_at != "") { %>
+                    <td style="text-align:left !important;width:25%"><%= moment(assigned_at).format('YYYY-MM-DD') %></td>
+                    <% }else{ %>
+                      <td style="text-align:left !important;width:25%">-</td>
+                    <% } %>
+                  
+              </tr>
+
+              <tr>
+                <td style="text-align:left !important;width:25%"><h6>Site</h6></td>
+                <td style="text-align:left !important;width:25%"><%= site %></td>
+
+                <td style="text-align:left !important;width:25%"><h6>Locaiton</h6></td>
+                <td style="text-align:left !important;width:25%"><%= address %></td>
+            </tr>
+
+            <tr>
+              <td style="text-align:left !important;width:25%"><h6>Risk Assessor</h6></td>
+              <td style="text-align:left !important;width:25%"><%= userName %></td>
+              <td style="text-align:left !important;width:25%"><h6>Assissted By</h6></td>
+              <td style="text-align:left !important;width:25%"><%= assisted_by %></td>
+          </tr>
+
+          <tr>
+            <td style="text-align:left !important;width:25%"><h6>Non-Employees Involved</h6></td>
+            <td style="text-align:left !important;width:25%">-</td>
+            <td style="text-align:left !important;width:25%"><h6>People at Risk</h6></td>
+            <td style="text-align:left !important;width:25%"><%= people_at_risk %></td>
+        </tr>
+
+        <tr>
+          <td colspan="1" style="text-align:left !important;width:25%"><h6>Task Description</h6></td>
+          <td colspan="3" style="text-align:left !important;width:75%"><%= description %></td>
+      </tr>
+
+      <tr>
+        <td colspan="1" style="text-align:left !important;width:25%"><h6>Risk Rating</h6></td>
+        <td colspan="3" style="text-align:left !important;width:75%"><%= risk_rating %></td>
+    </tr>
+    <tr>
+      <td style="text-align:left !important;width:25%"><h6>Review Date</h6></td>
+      <% if(getReviewDate != "") { %>
+        <td style="text-align:left !important;width:25%"><%= moment(getReviewDate).format('YYYY-MM-DD') %></td>
+        <% }else{ %>
+          <td style="text-align:left !important;width:25%">-</td>
+        <% } %>
+      
+      <td style="text-align:left !important;width:25%"><h6>Reviewer</h6></td>
+      <td style="text-align:left !important;width:25%"><%= reviewer %></td>
+  </tr>
+
+  <tr>
+      <td style="text-align:left !important;width:25%"><h6>Comment</h6></td>
+      <td style="text-align:left !important;width:75%" colspan="3"><%= activityComment %></td>
+  </tr>
+  <tr>
+    <td style="text-align:left !important;width:25%"><h6>Xad Code</h6></td>
+    <td style="text-align:left !important;width:75%" colspan="3"><%= xad_code %></td>
+  </tr>
+
+           
+    
+    </table>
+    <table class="table table-inverse factors-table" style="width:100%;;margin-top:20px;border: none !important;">
+      <tr>
+          <td style="text-align:left !important;border: none !important;"><h4><u>Hazards</u></h4></td>
+          
+      </tr>
+</table>
+<% if(hazards_data_user.length > 0) { %>
+  <% for (var i =0; i < hazards_data_user.length;  i++ ) { %>
+            <table class="table table-bordered table-inverse factors-table" style="width:100%;margin-top:10px">
+                
+                  <tbody>
+                   
+                  <tr>
+                      <td style="width:20%;text-align:center">Hazard</td>
+                <td style="width:80%;text-align:left;" colspan="3">
+                <p><%= hazards_data_user[i].hazard_name %></p>
+                </td>
+                  </tr>
+                  <tr>
+                    <td style="width:20%;text-align:center">Risk of Harm</td>
+              <td style="width:80%;text-align:left;" colspan="3">
+              <p><%= hazards_data_user[i].possible_harm %></p>
+              </td>
+                </tr>
+                <tr>
+                  <td style="width:20%;text-align:center">Existing Control Measures</td>
+            <td style="width:80%;text-align:left;" colspan="3">
+            <p><%= hazards_data_user[i].control_measures %></p>
+            </td>
+              </tr>
+            <tr>
+              <td style="width:20%;text-align:center">Image</td>
+              <td style="width:80%;text-align:left;" colspan="3">
+                <% if (hazards_data_user[i].images) { %>
+                  <img src="<%= hazards_data_user[i].images %>" alt="Hazard Image" width="100%">
+                  <% console.log(hazards_data_user[i].images); %>
+                <% } else { %>
+                  No Image Available
+                <% } %>
+              </td>
+            </tr>             
+          </tbody>
+        </table>
+        <% } %>
+        <% } %>
+
+
+        <table class="table table-inverse factors-table" style="width:100%;;margin-top:20px;border: none !important;">
+          <tr>
+              <td style="text-align:left !important;border: none !important;"><h4><u>Reviews</u></h4></td>
+              
+          </tr>
+    </table>
+    
+                <table class="table table-bordered table-inverse factors-table" style="width:100%;margin-top:10px">
+                  <thead>
+                    <tr>
+                      <th style="width:20%;text-align:center">Review Date</th>
+                      <th style="width:40%;text-align:center">Reviewer</th>
+                      <th style="width:40%;text-align:center">Comment</th>
+                    </tr>
+                  </thead>
+                      <tbody>
+                        <% if(reviews.length > 0) { %>
+                          <% for (var i =0; i < reviews.length;  i++ ) { %>
+                      <tr>
+                    <td style="text-align:left;"><%= moment(reviews[i].review_date).format('YYYY-MM-DD') %></td>
+                  <td style="text-align:left;"><%= reviews[i].fullName %></td>
+                <td style="text-align:left;"><%= reviews[i].comment %></td>
+                  </tr>
+                  <% } %>
+            <% } %>
+              </tbody>
+            </table>
+            <% if(userTypeClient == "client") { %>
+            <table class="table table-inverse factors-table" style="width:100%;;margin-top:20px;border: none !important;">
+              <tr>
+                  <td style="text-align:left !important;border: none !important;"><h4><u>Client Reviews</u></h4></td>
+                  
+              </tr>
+              <tr>
+                <td style="text-align:left;">Comment</td>
+                <td style="text-align:left;"><%= clientStatusComment %></td>
+              </tr>
+
+              <tr>
+                <td style="text-align:left;">Status</td>
+                <td style="text-align:left;"><%= clientActivityStatus %></td>
+              </tr>
+        </table>
+        <% } %>
+
+        <% if(userTypeSupervisor == "pc") { %>
+          <table class="table table-inverse factors-table" style="width:100%;;margin-top:20px;border: none !important;">
+            <tr>
+                <td style="text-align:left !important;border: none !important;"><h4><u>Supervisor Reviews</u></h4></td>
+                
+            </tr>
+            <tr>
+              <td style="text-align:left;">Comment</td>
+              <td style="text-align:left;"><%= statusComment %></td>
+            </tr>
+
+            <tr>
+              <td style="text-align:left;">Status</td>
+              <td style="text-align:left;"><%= activityStatus %></td>
+            </tr>
+      </table>
+      <% } %>
+    
+        
+    
+    
+    </div>
