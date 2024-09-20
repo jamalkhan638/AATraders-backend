@@ -67,6 +67,7 @@ export class Users {
   emailToLowerCase() {
     this.email = this.email.toLowerCase();
   }
+  
 
   
   // @BeforeUpdate()
