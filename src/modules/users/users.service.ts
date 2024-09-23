@@ -51,21 +51,19 @@ export class UsersService extends TypeOrmQueryService<Users>  {
  
 
   
-  async getUsers(page,limit) {
+  async getUsers() {
     try {
       // console.log("isCompletedisCompleted",options.limit);
     //   var limit:number = options.limit;
     //   var page = options.page;
-      var numPerPage = limit;
-      var skip:any = (page-1) * numPerPage;
+      // var numPerPage = limit;
+      // var skip:any = (page-1) * numPerPage;
 
 
-    var limitPage = "limit " + skip + "," + numPerPage;
+    // var limitPage = "limit " + skip + "," + numPerPage;
     //   var offset = (page - 1) * limit
     
       var select_query = 'SELECT * FROM users';
-     
-      console.log("select_query",select_query);
       var res_query = this.connection.query(select_query);
       if (!res_query) {
         throw new NotFoundException(`Agency not found`);
