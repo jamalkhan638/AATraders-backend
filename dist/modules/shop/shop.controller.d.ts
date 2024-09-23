@@ -1,6 +1,6 @@
-import { Response } from 'express';
-import { updateShopDto } from './dto/shop.dto';
-import { ShopService } from './shop.service';
+import { Response } from "express";
+import { updateShopDto } from "./dto/shop.dto";
+import { ShopService } from "./shop.service";
 export declare class ShopController {
     private readonly shopService;
     constructor(shopService: ShopService);
@@ -8,7 +8,10 @@ export declare class ShopController {
     getShop(id: number, res?: Response): Promise<Response<any, Record<string, any>>>;
     getAllCandidates(res?: Response): Promise<Response<any, Record<string, any>>>;
     updateShop(id: number, mydata: updateShopDto, headers: Headers, res: Response): Promise<Response<any, Record<string, any>>>;
+    deleteShop(id: number): Promise<string>;
     addExpense(data: any, headers: Headers, res?: Response): Promise<Response<any, Record<string, any>>>;
+    getAllExpense(res?: Response): Promise<Response<any, Record<string, any>>>;
     udpateExpense(id: number, data: any, headers: Headers, res?: Response): Promise<Response<any, Record<string, any>>>;
     deleteExpense(id: number): Promise<string>;
+    deleteAllExpenses(res?: Response): Promise<Response<any, Record<string, any>>>;
 }

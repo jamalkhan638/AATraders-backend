@@ -82,6 +82,16 @@ let ProductController = class ProductController {
             throw ex;
         }
     }
+    async deleteProduct(id) {
+        try {
+            if (!id)
+                throw new common_1.HttpException('Please enter a valid id', common_1.HttpStatus.BAD_REQUEST);
+            return await this.productService.deleteProdcuct(id);
+        }
+        catch (ex) {
+            throw ex;
+        }
+    }
 };
 __decorate([
     (0, common_1.Post)('/register'),
@@ -167,6 +177,13 @@ __decorate([
     __metadata("design:paramtypes", [Number, products_dto_1.UpdateProductDto, Object, Object]),
     __metadata("design:returntype", Promise)
 ], ProductController.prototype, "updateProduct", null);
+__decorate([
+    (0, common_1.Delete)('/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], ProductController.prototype, "deleteProduct", null);
 ProductController = __decorate([
     (0, common_1.Controller)('product'),
     (0, swagger_1.ApiTags)('Product'),

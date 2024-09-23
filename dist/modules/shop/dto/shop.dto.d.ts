@@ -3,7 +3,8 @@ export declare class addShopDto {
     ntn: string;
     strn: string;
     contactPerson: string;
-    channel: string;
+    address: string;
+    cnic: string;
     cell: string;
     credit: string;
 }
@@ -12,7 +13,8 @@ export declare class updateShopDto {
     ntn: string;
     strn: string;
     contactPerson: string;
-    channel: string;
+    address: string;
+    cnic: string;
     cell: string;
     credit: string;
 }

@@ -4,7 +4,8 @@ export declare class Shop {
     ntn: string;
     strn: string;
     contactPerson: string;
-    channel: string;
+    address: string;
+    cnic: string;
     cell: string;
     credit: string;
     createdAt: Date;

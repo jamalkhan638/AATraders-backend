@@ -31,7 +31,10 @@ export class Shop {
   contactPerson: string;
 
   @Column({default:null})
-  channel: string;
+  address: string;
+
+  @Column({default:null})
+  cnic: string;
 
   @Column({default:null})
   cell: string;

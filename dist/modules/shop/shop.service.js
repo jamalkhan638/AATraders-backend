@@ -21,7 +21,7 @@ const typeorm_2 = require("typeorm");
 const core_1 = require("@nestjs/core");
 const nestjs_config_1 = require("nestjs-config");
 const jwt_1 = require("@nestjs/jwt");
-var moment = require('moment');
+var moment = require("moment");
 const axios = require("axios").default;
 let ShopService = class ShopService extends query_typeorm_1.TypeOrmQueryService {
     constructor(shopRepository, jwtService, config, request, connection) {
@@ -34,7 +34,7 @@ let ShopService = class ShopService extends query_typeorm_1.TypeOrmQueryService 
     }
     async getShop(id) {
         try {
-            var selectUserQuery = 'SELECT shops.* from shops where shops.id =' + id;
+            var selectUserQuery = "SELECT shops.* from shops where shops.id =" + id;
             var user = await this.connection.query(selectUserQuery);
             if (!user) {
                 throw new common_1.NotFoundException(`User #${id} not found`);
@@ -47,7 +47,7 @@ let ShopService = class ShopService extends query_typeorm_1.TypeOrmQueryService 
     }
     async getAllShops() {
         try {
-            var selectAllShops = 'SELECT * from shops';
+            var selectAllShops = "SELECT * from shops";
             var getShopsList = await this.connection.query(selectAllShops);
             return getShopsList;
         }
@@ -71,7 +71,8 @@ let ShopService = class ShopService extends query_typeorm_1.TypeOrmQueryService 
         try {
             if (data.name) {
                 let shopExist = await this.shopRepository.findOne({
-                    where: { name: data.name }, withDeleted: true
+                    where: { name: data.name },
+                    withDeleted: true,
                 });
                 if (shopExist) {
                     return "alreadyexist";
@@ -82,10 +83,11 @@ let ShopService = class ShopService extends query_typeorm_1.TypeOrmQueryService 
             shop.ntn = data.ntn;
             shop.strn = data.strn;
             shop.contactPerson = data.contactPerson;
-            shop.channel = data.channel;
+            shop.address = data.address;
+            shop.cnic = data.cnic;
             shop.cell = data.cell;
             shop.credit = data.credit;
-            shop.createdAt = moment().format('YYYY-MM-DD');
+            shop.createdAt = moment().format("YYYY-MM-DD");
             var execute_user = await this.shopRepository.save(shop);
             if (execute_user) {
             }
@@ -100,11 +102,14 @@ let ShopService = class ShopService extends query_typeorm_1.TypeOrmQueryService 
             if (data.expenseType) {
                 var selectUserQuery = 'SELECT id from expenses where type ="' + data.expenseType + '"';
                 var expenseExist = await this.connection.query(selectUserQuery);
-                if (expenseExist.length > 0) {
-                    return "alreadyexist";
-                }
             }
-            var delete_query = "INSERT into expenses(type,expense)VALUES('" + data.expenseType + "','" + data.expense + "')";
+            var delete_query = "INSERT into expenses(type,expense,created_at)VALUES('" +
+                data.expenseType +
+                "','" +
+                data.expense +
+                "','" +
+                data.created_at +
+                "')";
             var delete_query_execute = await this.connection.query(delete_query);
             if (delete_query_execute) {
                 return "done";
@@ -114,9 +119,26 @@ let ShopService = class ShopService extends query_typeorm_1.TypeOrmQueryService 
             throw err;
         }
     }
+    async getAllExpense() {
+        try {
+            var selectExpense = "SELECT * from expenses";
+            var getExepnseList = await this.connection.query(selectExpense);
+            return getExepnseList;
+        }
+        catch (ex) {
+            throw ex;
+        }
+    }
     async updateExpense(data, id) {
         try {
-            var delete_query = "UPDATE expenses set type='" + data.expenseType + "',expense='" + data.expense + "' where  id =" + id;
+            var delete_query = "UPDATE expenses set type='" +
+                data.expenseType +
+                "',expense='" +
+                data.expense +
+                "',created_at='" +
+                data.created_at +
+                "' where  id =" +
+                id;
             var delete_query_execute = await this.connection.query(delete_query);
             if (delete_query_execute) {
                 return "done";
@@ -138,6 +160,17 @@ let ShopService = class ShopService extends query_typeorm_1.TypeOrmQueryService 
             throw ex;
         }
     }
+    async deleteAllExpenses() {
+        try {
+            const query = `DELETE FROM expenses`;
+            console.log('Executing query:', query);
+            const result = await this.connection.query(query);
+            return result;
+        }
+        catch (error) {
+            throw new Error("Failed to delete all expenses: " + error.message);
+        }
+    }
     mysql_real_escape_string_func(str) {
         return str.replace(/[\0\x08\x09\x1a\n\r"'\\\%]/g, function (char) {
             switch (char) {
@@ -153,7 +186,7 @@ let ShopService = class ShopService extends query_typeorm_1.TypeOrmQueryService 
                     return "\\n";
                 case "\r":
                     return "\\r";
-                case "\"":
+                case '"':
                 case "'":
                 case "\\":
                 case "%":
@@ -168,7 +201,8 @@ let ShopService = class ShopService extends query_typeorm_1.TypeOrmQueryService 
             shop.ntn = data.ntn;
             shop.strn = data.strn;
             shop.contactPerson = data.contactPerson;
-            shop.channel = data.channel;
+            shop.address = data.address;
+            shop.cnic = data.cnic;
             shop.cell = data.cell;
             shop.credit = data.credit;
             await this.shopRepository.update(id, shop);

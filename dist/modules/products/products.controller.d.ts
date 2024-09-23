@@ -8,4 +8,5 @@ export declare class ProductController {
     getProduct(id: number, res?: Response): Promise<Response<any, Record<string, any>>>;
     getAllCandidates(res?: Response): Promise<Response<any, Record<string, any>>>;
     updateProduct(id: number, mydata: UpdateProductDto, headers: Headers, res: Response): Promise<Response<any, Record<string, any>>>;
+    deleteProduct(id: number): Promise<string>;
 }

@@ -36,7 +36,11 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)({ default: null }),
     __metadata("design:type", String)
-], Shop.prototype, "channel", void 0);
+], Shop.prototype, "address", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: null }),
+    __metadata("design:type", String)
+], Shop.prototype, "cnic", void 0);
 __decorate([
     (0, typeorm_1.Column)({ default: null }),
     __metadata("design:type", String)
