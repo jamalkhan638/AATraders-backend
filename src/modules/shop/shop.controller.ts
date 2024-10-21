@@ -406,72 +406,81 @@ export class ShopController {
 /////////////////////////for invoice /////////////////////////////////////////////////
 
 @Post('/product/addInvoiceData')
-    @ApiBody({
+@ApiBody({
       schema: {
-        type: 'object',
+        type: 'array',
         properties: {
-          invoiceNumber :{
-            type: 'string'
-          },
-          productName :{
-            type: 'string'
-          },
-          productCode :{
-            type: 'string'
-          },
-          rpIncTax :{
-            type: 'string'
-          },
-          rateCode :{
-            type: 'string'
-          },
-          tpExclude :{
-            type: 'string'
-          },
-          quantityCtn :{
-              type: 'string'
-            },
-          quantityPcs :{
-              type: 'string'
-            },
-          totalWeight :{
-              type: 'string'
-            },
-          valueExculdedTax :{
-              type: 'string'
-            },
-          gst18 :{
-              type: 'string'
-            },
-          valueIncludedGst :{
-              type: 'string'
-            },
-          toRate :{
-              type: 'string'
-            },
-          atoRate :{
-              type: 'string'
-            },
-          specialDiscount :{
-              type: 'string'
-            },
-          totalTradeOffer :{
-              type: 'string'
-            },
-          grossInvoiceValue :{
-              type: 'string'
-            },
-          shopId :{
-              type: 'number'
-            },  
         },
       },
     })
+
+    
+    // @ApiBody({
+    //   schema: {
+    //     type: 'object',
+    //     properties: {
+    //       invoiceNumber :{
+    //         type: 'string'
+    //       },
+    //       productName :{
+    //         type: 'string'
+    //       },
+    //       productCode :{
+    //         type: 'string'
+    //       },
+    //       rpIncTax :{
+    //         type: 'string'
+    //       },
+    //       rateCode :{
+    //         type: 'string'
+    //       },
+    //       tpExclude :{
+    //         type: 'string'
+    //       },
+    //       quantityCtn :{
+    //           type: 'string'
+    //         },
+    //       quantityPcs :{
+    //           type: 'string'
+    //         },
+    //       totalWeight :{
+    //           type: 'string'
+    //         },
+    //       valueExculdedTax :{
+    //           type: 'string'
+    //         },
+    //       gst18 :{
+    //           type: 'string'
+    //         },
+    //       valueIncludedGst :{
+    //           type: 'string'
+    //         },
+    //       toRate :{
+    //           type: 'string'
+    //         },
+    //       atoRate :{
+    //           type: 'string'
+    //         },
+    //       specialDiscount :{
+    //           type: 'string'
+    //         },
+    //       totalTradeOffer :{
+    //           type: 'string'
+    //         },
+    //       grossInvoiceValue :{
+    //           type: 'string'
+    //         },
+    //       shopId :{
+    //           type: 'number'
+    //         },  
+    //     },
+    //   },
+    // })
     async addInvoiceData(@Body() data,@Headers() headers: Headers,@Res() res?: Response) {
         try {
             var response = await this.shopService.addInvoiceData(data);
-            if(response == "alreadyexist"){
-              return res.status(HttpStatus.OK).json({statusCode:res.statusCode,statusMessage:"Invoice Already Exist",data:"Invoice Already Exist"});
+            if(response == "norecord"){
+              return res.status(HttpStatus.OK).json({statusCode:res.statusCode,statusMessage:"Invoice Record is Missing",data:"Invoice Record is Missing"});
           }else{
               return res.status(HttpStatus.OK).json({statusCode:res.statusCode,statusMessage:"Invoice has been added successfully",data:"Invoice has been added successfully"});
           }
@@ -499,9 +508,6 @@ export class ShopController {
         
     }
 
-    
-
-    
 
     @Get('/all/product/invoice/getAllInvoices/:shopId')
     async getAllInvoices(@Param('shopId') shopId: number,@Res() res?: Response) {

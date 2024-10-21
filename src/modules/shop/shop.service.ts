@@ -261,20 +261,39 @@ export class ShopService extends TypeOrmQueryService<Shop> {
 
   async addInvoiceData(data) {
     try {
-    
-      var insertInvoiceQuery = "INSERT into invoice(invoiceNumber,productName,productCode,rpIncTax,rateCode,";
-      insertInvoiceQuery += "tpExclude,quantityCtn,quantityPcs,totalWeight,valueExculdedTax,";
-      insertInvoiceQuery += "gst18,valueIncludedGst,toRate,atoRate,";
-      insertInvoiceQuery += "specialDiscount,totalTradeOffer,grossInvoiceValue,invoiceDate,shopId)VALUES(";
-      insertInvoiceQuery += "'"+data.invoiceNumber+"','"+data.productName+"','"+data.productCode+"','"+data.rpIncTax+"','"+data.rateCode+"',";
-      insertInvoiceQuery += "'"+data.tpExclude+"','"+data.quantityCtn+"','"+data.quantityPcs+"','"+data.totalWeight+"','"+data.valueExculdedTax+"',";
-      insertInvoiceQuery += "'"+data.gst18+"','"+data.valueIncludedGst+"','"+data.toRate+"','"+data.atoRate+"',";
-      insertInvoiceQuery += "'"+data.specialDiscount+"','"+data.totalTradeOffer+"','"+data.grossInvoiceValue+"','"+moment().format('DD-MM-YYYY')+"',"+data.shopId+"";
-      insertInvoiceQuery += ")";
-      var insert_query_execute = await this.connection.query(insertInvoiceQuery);
-      if(insert_query_execute){
-        return "done";
+      if(data.length == 0){
+        return "norecord";
       }
+    if(data.length > 0){
+      for(var i=0;i<data.length;i++){
+        var insertInvoiceQuery = "INSERT into invoice(invoiceNumber,productName,productCode,rpIncTax,rateCode,";
+            insertInvoiceQuery += "tpExclude,quantityCtn,quantityPcs,totalWeight,valueExculdedTax,";
+            insertInvoiceQuery += "gst18,valueIncludedGst,toRate,atoRate,";
+            insertInvoiceQuery += "specialDiscount,totalTradeOffer,grossInvoiceValue,invoiceDate,shopId)VALUES(";
+            insertInvoiceQuery += "'"+data[i].invoiceNumber+"','"+data[i].productName+"','"+data[i].productCode+"','"+data[i].rpIncTax+"','"+data[i].rateCode+"',";
+            insertInvoiceQuery += "'"+data[i].tpExclude+"','"+data[i].quantityCtn+"','"+data[i].quantityPcs+"','"+data[i].totalWeight+"','"+data[i].valueExculdedTax+"',";
+            insertInvoiceQuery += "'"+data[i].gst18+"','"+data[i].valueIncludedGst+"','"+data[i].toRate+"','"+data[i].atoRate+"',";
+            insertInvoiceQuery += "'"+data[i].specialDiscount+"','"+data[i].totalTradeOffer+"','"+data[i].grossInvoiceValue+"','"+moment().format('DD-MM-YYYY')+"',"+data[i].shopId+"";
+            insertInvoiceQuery += ")";
+            var insert_query_execute = await this.connection.query(insertInvoiceQuery);
+            
+      }
+      return "done";
+    }
+      // return "done";
+      // var insertInvoiceQuery = "INSERT into invoice(invoiceNumber,productName,productCode,rpIncTax,rateCode,";
+      // insertInvoiceQuery += "tpExclude,quantityCtn,quantityPcs,totalWeight,valueExculdedTax,";
+      // insertInvoiceQuery += "gst18,valueIncludedGst,toRate,atoRate,";
+      // insertInvoiceQuery += "specialDiscount,totalTradeOffer,grossInvoiceValue,invoiceDate,shopId)VALUES(";
+      // insertInvoiceQuery += "'"+data.invoiceNumber+"','"+data.productName+"','"+data.productCode+"','"+data.rpIncTax+"','"+data.rateCode+"',";
+      // insertInvoiceQuery += "'"+data.tpExclude+"','"+data.quantityCtn+"','"+data.quantityPcs+"','"+data.totalWeight+"','"+data.valueExculdedTax+"',";
+      // insertInvoiceQuery += "'"+data.gst18+"','"+data.valueIncludedGst+"','"+data.toRate+"','"+data.atoRate+"',";
+      // insertInvoiceQuery += "'"+data.specialDiscount+"','"+data.totalTradeOffer+"','"+data.grossInvoiceValue+"','"+moment().format('DD-MM-YYYY')+"',"+data.shopId+"";
+      // insertInvoiceQuery += ")";
+      // var insert_query_execute = await this.connection.query(insertInvoiceQuery);
+      // if(insert_query_execute){
+      //   return "done";
+      // }
     } catch (err) {
       throw err
     }
