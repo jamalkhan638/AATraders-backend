@@ -461,6 +461,9 @@ export class ShopController {
           grossInvoiceValue :{
               type: 'string'
             },
+          shopId :{
+              type: 'number'
+            },  
         },
       },
     })
@@ -500,10 +503,10 @@ export class ShopController {
 
     
 
-    @Get('/all/product/invoice/getAllInvoices')
-    async getAllInvoices(@Res() res?: Response) {
+    @Get('/all/product/invoice/getAllInvoices/:shopId')
+    async getAllInvoices(@Param('shopId') shopId: number,@Res() res?: Response) {
         try { 
-        var response = await this.shopService.getAllInvoices();
+        var response = await this.shopService.getAllInvoices(shopId);
         if(response){
           return res.status(HttpStatus.OK).json({statusCode:res.statusCode,statusMessage:"Invoices detail",data:response});
           }else{

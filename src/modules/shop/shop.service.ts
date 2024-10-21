@@ -74,10 +74,13 @@ export class ShopService extends TypeOrmQueryService<Shop> {
     }
   }
 
-  async getAllInvoices() {
+  async getAllInvoices(shopId) {
     try {
+      if (!shopId) {
+        throw new NotFoundException(`Shop #${shopId} not found`);
+      }
       // return await this.candidateRepository.find({ where: { status:1 } });
-      var selectAllInvoice = 'SELECT * from invoice';
+      var selectAllInvoice = 'SELECT * from invoice where shopId = '+shopId;
       var getInvoiceList = await this.connection.query(selectAllInvoice);
       return getInvoiceList;
     } catch (ex) {
@@ -262,11 +265,11 @@ export class ShopService extends TypeOrmQueryService<Shop> {
       var insertInvoiceQuery = "INSERT into invoice(invoiceNumber,productName,productCode,rpIncTax,rateCode,";
       insertInvoiceQuery += "tpExclude,quantityCtn,quantityPcs,totalWeight,valueExculdedTax,";
       insertInvoiceQuery += "gst18,valueIncludedGst,toRate,atoRate,";
-      insertInvoiceQuery += "specialDiscount,totalTradeOffer,grossInvoiceValue,invoiceDate)VALUES(";
+      insertInvoiceQuery += "specialDiscount,totalTradeOffer,grossInvoiceValue,invoiceDate,shopId)VALUES(";
       insertInvoiceQuery += "'"+data.invoiceNumber+"','"+data.productName+"','"+data.productCode+"','"+data.rpIncTax+"','"+data.rateCode+"',";
       insertInvoiceQuery += "'"+data.tpExclude+"','"+data.quantityCtn+"','"+data.quantityPcs+"','"+data.totalWeight+"','"+data.valueExculdedTax+"',";
       insertInvoiceQuery += "'"+data.gst18+"','"+data.valueIncludedGst+"','"+data.toRate+"','"+data.atoRate+"',";
-      insertInvoiceQuery += "'"+data.specialDiscount+"','"+data.totalTradeOffer+"','"+data.grossInvoiceValue+"','"+moment().format('DD-MM-YYYY')+"'";
+      insertInvoiceQuery += "'"+data.specialDiscount+"','"+data.totalTradeOffer+"','"+data.grossInvoiceValue+"','"+moment().format('DD-MM-YYYY')+"',"+data.shopId+"";
       insertInvoiceQuery += ")";
       var insert_query_execute = await this.connection.query(insertInvoiceQuery);
       if(insert_query_execute){
