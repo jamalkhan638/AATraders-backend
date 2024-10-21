@@ -1,12 +1,10 @@
 import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put, Query, Res, UploadedFiles, UseGuards, Headers, UseInterceptors } from '@nestjs/common';
-import { ApiBearerAuth, ApiBody, ApiConsumes, ApiParam, ApiProperty, ApiTags } from '@nestjs/swagger';
+import {  ApiBody, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
-import { JwtAuthGuard } from '../../guards/auth/jwt-auth.guard';
+
 import { addProductDto,UpdateProductDto ,editFileName } from './dto/products.dto';
 import { ProductService } from './products.service';
-import { FilesInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
-import { IsNotEmpty } from 'class-validator';
+
 const axios = require("axios").default;
 
 @Controller('product')
@@ -22,7 +20,7 @@ export class ProductController {
           name :{
             type: 'string'
           },
-          weight :{
+          total_weight :{
             type: 'string'
           },
           unit :{
@@ -32,6 +30,12 @@ export class ProductController {
             type: 'string'
           },
           rateCode :{
+            type: 'string'
+          },
+          quantity_pcs :{
+            type: 'string'
+          },
+          quantity_ctn :{
             type: 'string'
           },
           price :{
@@ -103,7 +107,7 @@ export class ProductController {
           name :{
             type: 'string'
           },
-          weight :{
+          total_weight :{
             type: 'string'
           },
           unit :{
@@ -113,6 +117,12 @@ export class ProductController {
             type: 'string'
           },
           rateCode :{
+            type: 'string'
+          },
+          quantity_pcs :{
+            type: 'string'
+          },
+          quantity_ctn :{
             type: 'string'
           },
           price :{

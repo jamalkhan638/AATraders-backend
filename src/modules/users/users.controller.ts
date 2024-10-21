@@ -1,17 +1,9 @@
 import { Body, Controller, Delete, Get,UploadedFiles,HttpException, HttpStatus, Param, Post, Put, Query, Res, StreamableFile, UseGuards, UseInterceptors,Headers } from '@nestjs/common';
-import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from '../../guards/auth/jwt-auth.guard';
-import { SignupDto, UserUpdateDto,editFileName,CreateStaffDepartmentDto,UpdateStaffDepartmentDto,CreateStaffDesignationDto,UpdateStaffDesignationDto,CreateAreaDto,UpdateAreaDto,CreateCityDto,UpdateCityDto,CreateCountryDto,UpdateCountryDto } from './dto/users.dto';
-import { Response } from 'express';
+import {  ApiBody,  ApiTags } from '@nestjs/swagger';
+import { SignupDto, UserUpdateDto } from './dto/users.dto';
+
 import { UsersService } from './users.service';
-import { join } from 'path';
-import { createReadStream } from 'fs';
-import { FilesInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
-let ejs = require("ejs");
-let pdf = require("html-pdf");
-var fs = require('fs');
-let path = require("path");
+
 @Controller('users')
 @ApiTags('User')
 export class UsersController {
