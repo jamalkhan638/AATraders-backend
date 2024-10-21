@@ -22,7 +22,7 @@ export class Product {
   name: string;
 
   @Column({default:null})
-  weight: string;
+  total_weight: string;
 
   @Column({default:null})
   unit: string;
@@ -32,6 +32,10 @@ export class Product {
 
   @Column({default:null})
   rateCode: string;
+  @Column({default:null})
+  quantity_ctn: string;
+  @Column({default:null})
+  quantity_pcs: string;
 
   @Column({default:null})
   price: string;

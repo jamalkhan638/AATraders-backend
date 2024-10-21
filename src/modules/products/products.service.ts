@@ -1,16 +1,13 @@
-import { HttpException, HttpStatus, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {  Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { TypeOrmQueryService } from '@nestjs-query/query-typeorm';
 import { Product } from './products.entity';
 import { InjectConnection, InjectRepository } from '@nestjs/typeorm';
-import { Connection, Not, Repository } from 'typeorm';
+import { Connection,  Repository } from 'typeorm';
 import { REQUEST } from '@nestjs/core';
 import { Request } from 'express';
-import { TokenPayload } from 'src/types/token-payload.type';
 import { ConfigService } from 'nestjs-config';
 import { JwtService } from '@nestjs/jwt';
-import { addProductDto,UpdateProductDto } from './dto/products.dto';
-import { IPaginationOptions, paginate } from 'nestjs-typeorm-paginate';
-import { Console } from 'console';
+
 var moment = require('moment');
 const axios = require("axios").default;
 
@@ -84,10 +81,12 @@ export class ProductService extends TypeOrmQueryService<Product>  {
       }
       const product: Product = new Product();
       product.name = data.name;
-      product.weight = data.weight;
+      product.total_weight = data.total_weight;
       product.unit = data.unit;
       product.productCode = data.productCode;
       product.rateCode = data.rateCode;
+      product.quantity_pcs = data.quantity_pcs;
+      product.quantity_ctn = data.quantity_ctn;
       product.price = data.price;
       product.createdAt = moment().format('YYYY-MM-DD');
       
@@ -137,10 +136,12 @@ export class ProductService extends TypeOrmQueryService<Product>  {
 
       const product: Product = new Product();
       product.name = data.name;
-      product.weight = data.weight;
+      product.total_weight = data.total_weight;
       product.unit = data.unit;
       product.productCode = data.productCode;
       product.rateCode = data.rateCode;
+      product.quantity_pcs = data.quantity_pcs;
+      product.quantity_ctn = data.quantity_ctn;
       product.price = data.price;
 
       await this.productRepository.update(id, product);

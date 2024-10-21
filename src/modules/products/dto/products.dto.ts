@@ -12,7 +12,7 @@ export class addProductDto  {
 
   @IsNotEmpty()
   @ApiProperty()
-  weight: string;
+  total_weight: string;
   
   @IsNotEmpty()
   @ApiProperty()
@@ -24,6 +24,12 @@ export class addProductDto  {
 
   @ApiProperty()
   rateCode: string;
+
+  @ApiProperty()
+  quantity_ctn: string;
+
+  @ApiProperty()
+  quantity_pcs: string;
 
   @ApiProperty()
   price: string;
@@ -40,7 +46,7 @@ export class UpdateProductDto {
 
   @IsNotEmpty()
   @ApiProperty()
-  weight: string;
+  total_weight: string;
   
   @IsNotEmpty()
   @ApiProperty()
@@ -52,6 +58,12 @@ export class UpdateProductDto {
 
   @ApiProperty()
   rateCode: string;
+  
+  @ApiProperty()
+  quantity_ctn: string;
+
+  @ApiProperty()
+  quantity_pcs: string;
 
   @ApiProperty()
   price: string;
