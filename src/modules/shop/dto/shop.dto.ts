@@ -23,7 +23,10 @@ export class addShopDto  {
   contactPerson: string;
 
   @ApiProperty()
-  channel: string;
+  address: string;
+
+  @ApiProperty()
+  cnic: string;
 
   @ApiProperty()
   cell: string;
@@ -55,7 +58,10 @@ export class updateShopDto {
   contactPerson: string;
 
   @ApiProperty()
-  channel: string;
+  address: string;
+
+  @ApiProperty()
+  cnic: string;
 
   @ApiProperty()
   cell: string;

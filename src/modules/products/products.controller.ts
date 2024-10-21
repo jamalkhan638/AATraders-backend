@@ -136,5 +136,15 @@ export class ProductController {
         
     }
 
+    @Delete('/:id')
+    async deleteProduct(@Param('id') id: number) {
+        try {
+            if (!id) throw new HttpException('Please enter a valid id', HttpStatus.BAD_REQUEST)
+            return await this.productService.deleteProdcuct(id);
+        } catch (ex) {
+            throw ex;
+        }
+    }
+
 
 }
